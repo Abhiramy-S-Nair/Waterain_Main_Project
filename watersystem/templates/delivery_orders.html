@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assigned Orders</title>
+    <style>
+        /* Add your CSS styles here */
+        /* Resetting default margin and padding */
+        body, h1, h2, h3, p, ul {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Body typography and background */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f8f8;
+            padding: 20px;
+        }
+
+        /* Page title */
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        /* Table styles */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        /* Table header */
+        thead {
+            background-color: #333;
+            color: white;
+        }
+
+        /* Table rows */
+        tbody tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        /* Table cell padding and border */
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 10px;
+        }
+
+        /* Button styles */
+        button[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        /* Button hover effect */
+        button[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        /* Select dropdown style */
+        select {
+            padding: 6px 10px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            appearance: none; /* Removes default styling */
+        }
+
+        /* Form alignment */
+        form {
+            display: inline-block;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Assigned Orders</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>User</th>
+                {% comment %} <th>Delivery Address</th> {% endcomment %}
+                <th>Total Amount</th>
+                <th>Status</th>
+                <th>Order Date</th>
+                <th>Items</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in delivery_boy_orders %}
+            <tr>
+                <td>{{ order.id }}</td>
+                <td>{{ order.order.user.username }}</td>
+                <!-- Display delivery address -->
+                {% comment %} <td>
+                   
+                        {% if delivery_addresses %}
+                            {% for address in delivery_addresses %}
+                                {{ address.name }} <br>
+                                {{ address.address }} <br>
+                                {{ address.locality }}, {{ address.city }}, {{ address.district }} - {{ address.pincode }} <br>
+                                Phone: {{ address.phone_number }} <br>
+                            {% endfor %}
+                        {% else %}
+                            No delivery address found
+                        {% endif %}
+                </td> {% endcomment %}
+                <td>{{ order.order.total_amount }}</td>
+                <td>
+                    <form method="POST" action="{% url 'update_status' order.id %}">
+                        {% csrf_token %}
+                        <select name="status">
+                            {% for choice in order.STATUS_CHOICES %}
+                                <option value="{{ choice.0 }}" {% if choice.0 == order.status %} selected {% endif %}>{{ choice.1 }}</option>
+                            {% endfor %}
+                        </select>
+                        <button type="submit">Update Status</button>
+                    </form>
+                </td>
+                <td>{{ order.order.created_at|date:"Y-m-d" }}</td>
+                <td>
+                    <ul>
+                        {% for item in order.order.products.all %}
+                            <li>{{ item.name }}</li>
+                        {% endfor %}
+                    </ul>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        
+        
+    </table>
+</body>
+</html>

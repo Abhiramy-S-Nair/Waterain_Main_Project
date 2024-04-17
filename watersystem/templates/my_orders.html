@@ -1,0 +1,73 @@
+<!-- my_orders.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Orders</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            background-color: #f9f9f9;
+        }
+        img {
+            max-width: 100px;
+            max-height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>My Orders</h1>
+        <ul>
+            {% for order in orders %}
+                <li>
+                    <strong>Order ID:</strong> {{ order.id }}<br>
+                    <strong>Total Amount:</strong> Rs.{{ order.total_amount }}<br>
+                    <strong>Payment Status:</strong> Paid<br>
+                    <strong>Date Created:</strong> {{ order.created_at.date }}<br>
+                    <p>Status: {{ order.status }}</p>
+
+                    <button type="button" onclick="location.href='{% url 'cancel_order' order_id=order.id %}'">Cancel Order</button><br>
+                    <!-- Display order items -->
+                    <ul>
+                        {% for item in order.orderitem_set.all %}
+                            <li>
+                                <strong>Product Name:</strong> {{ item.product.name }}<br>
+                                <strong>Product Image:</strong> <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}"><br>
+                                <strong>Quantity:</strong> {{ item.quantity }}<br>
+                                <!-- Add more details as needed -->
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>

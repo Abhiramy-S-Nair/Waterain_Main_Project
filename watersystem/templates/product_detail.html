@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Detail</title>
+
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        h2 {
+            text-align: center;
+            color: #007bff;
+            margin-top: 20px;
+        }
+
+        p {
+            margin: 10px 0;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 5px;
+        }
+
+        h3 {
+            color: #007bff;
+            margin-top: 20px;
+        }
+
+        /* Navigation Bar styles */
+        nav {
+            background-color: #ffffff; /* White background */
+            padding: 15px 0;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Box shadow for a subtle effect */
+        }
+
+        nav a {
+            color: #333; /* Dark text color */
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+            font-size: 18px;
+            transition: color 0.3s ease-in-out;
+        }
+
+        nav a:hover {
+            color: #007bff; /* Hover color matches the primary color */
+        }
+
+        /* Container styles */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #ffffff; /* White background */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Box shadow for a subtle effect */
+            border: 2px solid #007bff; /* Border color is the primary color */
+            margin-top: 30px;
+            position: relative;
+        }
+
+        .container img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        /* Price history styles */
+        .price-history {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .price-entry {
+            margin-bottom: 10px;
+            color: #555;
+        }
+
+        /* Continue Editing and View Details buttons styles */
+        .action-buttons {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .continue-editing-btn,
+        .view-details-btn {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s, box-shadow 0.3s;
+            margin-bottom: 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .continue-editing-btn:hover,
+        .view-details-btn:hover {
+            background-color: #0056b3;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .view-details-btn {
+            background-color: #28a745; /* Green color for "View Details" */
+        }
+
+        .view-details-btn:hover {
+            background-color: #218838; /* Darker green on hover */
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav>
+        <a href="#">Home</a>
+        <a href="#">Products</a>
+        <a href="#">About Us</a>
+    </nav>
+
+    <!-- Product details container -->
+    <div class="container">
+        <h2>{{ product.name }}</h2>
+        <img src="{{ product.image.url }}" alt="{{ product.name }} Image">
+        <p>Brand: {{ product.brand }}</p>
+        <p>Price: Rs.{{ product.price }}</p>
+        <p>Offer: Rs.{{ product.offer }}</p>
+        <p>Category: {{ product.category }}</p>
+        <p>Description: {{ product.description }}</p>
+
+        <!-- Price History -->
+        <h3>Price History</h3>
+        <div class="price-history">
+            <ul class="price-entries">
+                {% for entry in price_history %}
+                    <li class="price-entry">{{ entry.timestamp }} - Price: Rs.{{ entry.price }}, Offer: Rs.{{ entry.offer }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <!-- Continue Editing and View Details buttons -->
+        <div class="action-buttons">
+            <a href="http://127.0.0.1:8000/products/" class="view-details-btn">View Product Details</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delivery Address Form</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 100%;
+            max-width: 800px; /* Adjust as needed */
+            text-align: left;
+        }
+
+        .tabs {
+            display: flex;
+            margin-bottom: 20px;
+        }
+
+        .tab {
+            flex: 1;
+            text-align: center;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-right: 10px;
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        .tab:last-child {
+            margin-right: 0;
+        }
+
+        .active-tab {
+            background-color: #0056b3;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active-content {
+            display: block;
+        }
+
+        h2 {
+            color: #333;
+            margin-top: 0;
+        }
+
+        .product-details {
+            display: flex;
+            align-items: center;
+        }
+
+        .product-image {
+            max-width: 40%;
+            margin-right: 20px;
+        }
+
+        .product-details-text {
+            max-width: 60%;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        input,
+        textarea,
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="tabs">
+           
+            <div class="tab" onclick="showTab('addressTab')">Delivery Address</div>
+        </div>
+
+   
+
+        <!-- Address Form Tab -->
+        <div class="tab-content" id="addressTab">
+            <form method="post" action="{% url 'add_delivery_address' %}">
+                {% csrf_token %}
+
+                <label for="name">Enter Your Name:</label>
+                <input type="text" name="name" required pattern="[a-zA-Z\s]+" title="Enter a valid name (letters only)" maxlength="100" placeholder="Enter your full name">
+        
+                <!-- Phone Number Field with Validation -->
+                <label for="phone_number">Enter Your Phone Number:</label>
+                <input type="tel" name="phone_number" required pattern="[0-9]{10}" title="Enter a valid 10-digit phone number" placeholder="Enter a valid 10-digit phone number">
+        
+                <!-- Pincode Field with Validation -->
+                <label for="pincode">Enter Your Pincode:</label>
+                <input type="text" name="pincode" required pattern="[0-9]{6}" title="Enter a valid 6-digit pincode" placeholder="Enter a valid 6-digit pincode">
+        
+                <!-- Locality Field with Validation -->
+                <label for="locality">Enter Your Locality:</label>
+                <input type="text" name="locality" required maxlength="255" placeholder="Your locality">
+        
+                <!-- Address Field with Validation -->
+                <label for="address">Enter Your Detailed Address:</label>
+                <textarea name="address" required maxlength="1000" placeholder="Your detailed address"></textarea>
+        
+                <!-- City Field with Validation -->
+                <label for="city">Select Your City:</label>
+                <select name="city" required>
+                    <option value="" disabled selected>Select your city</option>
+                    {% for city in cities %}
+                        <option value="{{ city.City_ID }}">{{ city.city_name }}</option>
+                    {% endfor %}
+                </select>
+        
+                <!-- District Field with Validation -->
+                <label for="district">Select Your District:</label>
+                <select name="district" required>
+                    <option value="" disabled selected>Select your district</option>
+                    {% for district in districts %}
+                        <option value="{{ district.district_id }}">{{ district.district_name }}</option>
+                    {% endfor %}
+                </select>
+        
+                <!-- Landmark Field -->
+                <label for="landmark">Enter Nearby Landmark (optional):</label>
+                <input type="text" name="landmark" maxlength="255" placeholder="Nearby landmark">
+        
+                <!-- Alternate Phone Number Field with Validation -->
+                <label for="alternate_phone_number">Enter Alternate Phone Number (optional):</label>
+                <input type="tel" name="alternate_phone_number" pattern="[0-9]{10}" title="Enter a valid 10-digit phone number" placeholder="Enter a valid 10-digit phone number">
+        
+                <!-- Address Type Field with Validation -->
+                <label for="address_type">Select Address Type:</label>
+                <select name="address_type" required>
+                    <option value="" disabled selected>Select address type</option>
+                    <option value="home">Home</option>
+                    <option value="work">Work</option>
+                </select>
+
+                <button type="submit">Save Address</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function showTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(tabContent => {
+                tabContent.classList.remove('active-content');
+            });
+
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active-tab');
+            });
+
+            document.getElementById(tabId).classList.add('active-content');
+            event.currentTarget.classList.add('active-tab');
+        }
+    </script>
+</body>
+</html>

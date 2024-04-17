@@ -1,0 +1,70 @@
+<!-- my_leave_details.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Leave Details</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h2 {
+            color: #007BFF;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #007BFF;
+            color: #fff;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h2>My Leave Details</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Reason</th>
+                <th>Status</th>
+                <th>Created At</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for leave_detail in leave_details %}
+                <tr>
+                    <td>{{ leave_detail.start_date }}</td>
+                    <td>{{ leave_detail.end_date }}</td>
+                    <td>{{ leave_detail.reason }}</td>
+                    <td>{{ leave_detail.status }}</td>
+                    <td>{{ leave_detail.created_at }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

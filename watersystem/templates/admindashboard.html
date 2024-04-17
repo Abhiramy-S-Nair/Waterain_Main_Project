@@ -1,0 +1,220 @@
+{%load static%}
+   <!doctype html>
+        <html lang="en">
+        <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+            <title>Waterain</title>
+            <link rel="shortcut icon" href="{% static 'assets/images/fav.png'%}" type="image/x-icon">
+           
+            <link rel="shortcut icon" href="{% static 'assets/images/fav.png'%}">
+            <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css'%}">
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+            <link rel="stylesheet" href="{% static 'assets/plugins/testimonial/css/owl.carousel.min.css'%}">
+            <link rel="stylesheet" href="{% static 'assets/plugins/testimonial/css/owl.theme.min.css'%}">
+            <link rel="stylesheet" type="text/css" href="{% static 'assets/css/style.css'%}" />
+            <link rel="stylesheet" href="{% static 'assets/css/animate.min.css'%}">
+        </head>
+        <body class="bg-white">
+          <header>
+                <div id="menu-jk" class="nav-part shadow-md bg-white navcol">
+                    <div class="container-lg">
+                        <div class="row  p-2">
+                            <div class="col-lg-3 p-2">
+                               <a href="index.html">
+                                <img class="max-230" src="{% static 'assets/images/logonew.png' %}" alt="" width="60" height="60">
+
+                                </a>
+                                 <a  data-bs-toggle="collapse" data-bs-target="#menu" class="float-end d-lg-none pt-1 ps-3"><i class="bi pt-1 fs-1 cp bi-list"></i></a>
+                            </div>
+                            <div id="menu" class="col-lg-9 d-none pt-1 d-lg-block">
+                                <ul class="fw-bold nacul fs-7">
+                                    <li class="float-start p-3 px-4"><a href="admindashboard.html">Dashboard</a></li>
+                                    
+                                    <li class="float-start p-3 px-4 dropdown">
+                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">View & Edit </a>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                            <a class="dropdown-item" href="registered_users.html">User Details</a>
+                                            <a class="dropdown-item" href="worker_list.html">Worker Details</a>
+                                            <a class="dropdown-item" href="vendor_details.html">Vendor Details</a>
+                                            <a class="dropdown-item" href="http://127.0.0.1:8000/product_list/">Product Details</a>
+                                          <a class="dropdown-item" href="service_details.html">Service Details</a>
+                                          <a class="dropdown-item" href="drinking_water_products/">Drinking Water Details</a>
+                                          <a class="dropdown-item" href="file_details.html">Knowledge Hub Details</a>
+                                          <a class="dropdown-item" href="http://127.0.0.1:8000/order_status/">order status</a>
+
+                                        </div>
+                                      </li>
+                                    <!--<li class="float-start p-3 px-4"><a href="registered_users.html">Users</a></li>-->
+                                    <!--<li class="float-start p-3 px-4"><a href="user_list.html">Registration Details</a></li>-->
+                                    <li class="float-start p-3 px-4 dropdown">
+                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Booking Details</a>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                          <a class="dropdown-item" href="http://127.0.0.1:8000/orders_list/">Order Details</a>
+                                        </div>
+                                      </li>
+                                      <li class="float-start p-3 px-4 dropdown">
+                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Add Info</a>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                          <a class="dropdown-item" href="add_workmanager.html">Add Work Manager Details</a>
+                                          <a class="dropdown-item" href="add_service.html">Add Service Details</a>
+                                          <a class="dropdown-item" href="add_drinking_water.html">Add Drinking Water Details</a>
+                                          <a class="dropdown-item" href="upload_file.html">Add Knowledge Hub Details</a>
+                                          <a class="dropdown-item" href="http://127.0.0.1:8000/add_category ">Add Category Details</a>
+                                          <a class="dropdown-item" href="adddistrict.html">Add District Details</a>
+                                          <a class="dropdown-item" href="add_city.html">Add City Details</a>
+                                        </div>
+                                      </li>
+                                    <li class="float-start p-3 px-4"><a href="{% url 'logout' %}">Logout</a></li>
+                                    <li class="float-start p-3 px-4">
+                                        <i class="bi bi-person"></i>
+                                        <span class="ml-2">Admin</span>
+                                      </li>
+                                    <li class="float-end d-none d-md-block pt-2">
+                                       
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            
+           
+       <!-- ##################### Slider Starts Here #################### -->
+            
+            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
+              <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+              </div>
+              <div class="carousel-inner">
+                <div class="carousel-item ">
+                  <img src="{% static 'assets/images/slider/s1.jpg'%}" class="d-block w-100" alt="...">
+                  <div class="carousel-caption   d-md-block">
+                      <div class="row">
+                           <div class="col-lg-6 animate__animated  animate__bounceInLeft text-start ">
+                              <h1 class="fs-12 fw-bolder text-start ">Waterain<br><span class="text-primary"></span> </h1> 
+                              <h1 class="fs-4 fw-bolder mt-4"> Home to dear drops </h1>
+                              <div class="d-inline-block pt-5 text-start d-none d-lg-block">
+                                  <button class="btn btn-primary shadow fs-5 fw-bolder px-5 py-2"><a href ='signup.html'>Register</button></a>
+                                  <button class="btn btn-outline-primary ms-4 shadow fs-5 fw-bolder px-5 py-2"><a href ='login.html'>Login</button></a>
+                              </div>
+                           </div>
+                           <div class="col-lg-6 animate__animated animate__bounceInRight d-none d-lg-block">
+                               <img class="w-100" src="{% static 'assets/images/sp1.jpg'%}" alt="">
+                           </div>
+                      </div>
+                  </div>
+                </div>
+                <div class="carousel-item active">
+                  <img src="{% static 'assets/images/slider/s2.jpg'%}" class="d-block w-100" alt="...">
+                  <div class="carousel-caption  d-md-block">
+                      <div class="row">
+                           <div class="col-lg-6  animate__animated  animate__bounceInLeft">
+                              <div id="adminCarousel" class="carousel slide" data-bs-ride="carousel">
+                                <div class="carousel-inner">
+                                  <div class="carousel-item active">
+                                    <h1>Welcome, Admin!</h1>
+                                    <p style="color: #218380;">Your dashboard awaits you. Explore and manage with ease.</p>
+                                  </div>
+                                  <!-- Add more carousel items as needed -->
+                                </div>
+                              </div>
+                              
+                              
+                              <div class="d-inline-block pt-5 text-start d-none d-lg-block">
+                              </div>
+                           </div>
+                           
+                            
+                      </div>
+                  </div>
+                </div>
+              </div>
+              <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                <!--<span class="carousel-control-prev-icon" aria-hidden="true"><i class="bi fs-4 text-dark bi-chevron-left"></i></span>-->
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                <!--<span class="carousel-control-next-icon" aria-hidden="true"><i class="bi fs-4 text-dark bi-chevron-right"></i></span>-->
+                <span class="visually-hidden">Next</span>
+              </button>
+            </div>
+            
+            
+            <!-- ##################### Why Choos US #################### -->
+             <div class="container-fluid products bg-gray big-padding pt-3">
+               <div class="container-xl">
+                   <div class="section-title row">
+                        <h2 class="fs-1 fw-bold">Our Services</h2>
+                        
+                    </div>
+                   <div class="row mt-5">
+                       <div class="col-lg-4 mb-4 col-md-6">
+                           <div class="cover text-center p-4 shadow-md bg-white">
+                               <img class="w-125" src="{% static 'assets/images/services/flood.png'%}" alt="">
+                               <h2 class="fs-4 fw-bolder mt-4">Water, Where You Want It.</h2>
+                               <p> With our service, you can enjoy the luxury of clean, crisp water exactly where and when you need it, elevating your daily hydration experience. </p>
+                           </div>
+                       </div>
+                       <div class="col-lg-4 mb-4 col-md-6">
+                           <div class="cover text-center p-4 shadow-md bg-white">
+                               <img class="w-125" src="{% static 'assets/images/services/002-drink-water.png'%}" alt="">
+                               <h2 class="fs-4 fw-bolder mt-4">Drinking Water Systems</h2>
+                               <p>Reliable drinking water supply, delivered straight to your home or office, ensures you have access to clean, pure hydration whenever you need it.  </p>
+                           </div>
+                       </div>
+                        <div class="col-lg-4 mb-4 col-md-6">
+                           <div class="cover text-center p-4 shadow-md bg-white">
+                               <img class="w-125" src="{% static 'assets/images/services/water-heater.png'%}" alt="">
+                               <h2 class="fs-4 fw-bolder mt-4"> Effective Water Crisis Solutions</h2>
+                               <p>designed to tackle scarcity and contamination head-on, ensuring clean and accessible water for all. </p>
+                           </div>
+                       </div>
+                       <div class="col-lg-4 mb-4 col-md-6">
+                           <div class="cover text-center p-4 shadow-md bg-white">
+                               <img class="w-125" src="{% static 'assets/images/services/water-tap.png'%}" alt="">
+                               <h2 class="fs-4 fw-bolder mt-4">Aquatic Ecosystem Restoration</h2>
+                               <p> Through advanced technologies and responsible stewardship, we're actively working to restore and protect our precious water resources.</p>
+                           </div>
+                       </div>
+                       <div class="col-lg-4 mb-4 col-md-6">
+                           <div class="cover text-center p-4 shadow-md bg-white">
+                               <img class="w-125" src="{% static 'assets/images/services/001-save-water.png'%}" alt="">
+                               <h2 class="fs-4 fw-bolder mt-4">Public Awareness Campaigns</h2>
+                               <p> serve as powerful tools to inform, engage, and empower individuals and communities. driving positive change and progress.</p>
+                           </div>
+                       </div>
+                       <div class="col-lg-4 mb-4 col-md-6">
+                           <div class="cover text-center p-4 shadow-md bg-white">
+                               <img class="w-125" src="{% static 'assets/images/services/ph.png'%}" alt="">
+                               <h2 class="fs-4 fw-bolder mt-4">Monitoring Water Health</h2>
+                               <p>crucial for assessing the safety and purity of our water sources.water quality testing services provide accurate results  ensuring that your water meets the highest standards of health and safety.</p>
+                           </div>
+                       </div>
+                       
+                   </div>
+               </div>
+           </div>
+           
+          
+           <div class="copy">
+            <div class="container">
+                <a href="https://www.smarteyeapps.com/"></a>
+
+              
+            </div>
+        </div>
+
+
+        </body>
+        <script src="{% static 'assets /js/jquery-3.2.1.min.js'%}"></script>
+        <script src="{% static 'assets /js/popper.min.js'%}"></script>
+        <script src="{% static 'assets /js/bootstrap.bundle.min.js'%}"></script>
+        <script src="{% static 'assets /plugins/scroll-fixed/jquery-scrolltofixed-min.js'%}"></script>
+        <script src="{% static 'assets /plugins/testimonial/js/owl.carousel.min.js'%}"></script>
+        <script src="{% static 'assets /js/script.js'%}"></script>
+
+    </html>

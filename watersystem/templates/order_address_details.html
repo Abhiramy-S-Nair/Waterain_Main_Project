@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>All Orders and Address Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            background-color: #007bff;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #007bff;
+            color: #fff;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #ddd;
+        }
+    </style>
+</head>
+<body>
+    <h1>All Orders and Address Details</h1>
+    <table>
+        <tr>
+            <th>Order ID</th>
+            <th>Username</th>
+            <th>Product Name</th>
+            <th>Product Price</th>
+            <th>Quantity</th>
+            <th>Mobile Number</th>
+            <th>Pincode</th>
+            <th>Locality</th>
+            <th>Street</th>
+            <th>District</th>
+        </tr>
+        {% for order_detail in order_details %}
+            <tr>
+                <td>{{ order_detail.order_id }}</td>
+                <td>{{ order_detail.user }}</td>
+                <td>{{ order_detail.product_name }}</td>
+                <td>{{ order_detail.product_price }}</td>
+                <td>{{ order_detail.quantity }}</td>
+                <td>{{ order_detail.mobile_number }}</td>
+                <td>{{ order_detail.pincode }}</td>
+                <td>{{ order_detail.locality }}</td>
+                <td>{{ order_detail.street }}</td>
+                <td>{{ order_detail.district_name }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

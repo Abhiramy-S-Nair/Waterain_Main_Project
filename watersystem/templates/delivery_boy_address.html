@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delivery Boy Address</title>
+    <style>
+        /* General styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        p {
+            margin-bottom: 10px;
+        }
+        strong {
+            font-weight: bold;
+        }
+        /* Delivery address styles */
+        .address-info {
+            border-top: 1px solid #ccc;
+            padding-top: 20px;
+        }
+        /* Conditional styles */
+        .no-address {
+            color: #999;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Delivery Boy Address</h1>
+        {% if delivery_boy_address %}
+            <div class="address-info">
+                <p><strong>Phone Number:</strong> {{ delivery_boy_address.phone_number }}</p>
+                <p><strong>Pincode:</strong> {{ delivery_boy_address.pincode }}</p>
+                <p><strong>Locality:</strong> {{ delivery_boy_address.locality }}</p>
+                <p><strong>Address:</strong> {{ delivery_boy_address.address }}</p>
+                <p><strong>City:</strong> {{ delivery_boy_address.city.city_name }}</p>
+                <p><strong>District:</strong> {{ delivery_boy_address.district.district_name }}</p>
+                {% if delivery_boy_address.landmark %}
+                    <p><strong>Landmark:</strong> {{ delivery_boy_address.landmark }}</p>
+                {% endif %}
+                {% if delivery_boy_address.alternate_phone_number %}
+                    <p><strong>Alternate Phone Number:</strong> {{ delivery_boy_address.alternate_phone_number }}</p>
+                {% endif %}
+            </div>
+        {% else %}
+            <p class="no-address">No delivery boy address found for the logged-in user.</p>
+        {% endif %}
+    </div>
+</body>
+</html>

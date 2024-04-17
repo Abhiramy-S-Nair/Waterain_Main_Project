@@ -1,0 +1,124 @@
+<!-- delivery_app/templates/vendor_profile.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vendor Profile</title>
+    <!-- Add the Font Awesome CSS link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+            color: #000;
+        }
+
+        .profile-container {
+            background-color: rgba(0, 0, 0, 0.7);
+            max-width: 1000px;
+            margin: 20px auto;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .profile-header {
+            background-color: #3498db;
+            text-align: center;
+            padding: 20px;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+
+        .profile-icon img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+        }
+
+        .user-name {
+            font-size: 24px;
+            margin-top: 10px;
+            color: #fff;
+        }
+
+        .user-options {
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .user-option {
+            text-align: center;
+            margin: 0 20px;
+        }
+
+        .user-option a {
+            background-color: #3498db;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .user-option a:hover {
+            background-color: #2980b9;
+        }
+
+        .profile-details {
+            padding: 20px;
+        }
+
+        .profile-details h2 {
+            font-size: 24px;
+            color: #3498db;
+            margin-bottom: 10px;
+        }
+
+        .user-details-container {
+            background-color: #f2f2f2;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .user-info {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="profile-container">
+        <div class="profile-header">
+            <div class="profile-icon">
+                <img src="{{ vendor_details.profile_photo.url }}" alt="Profile Photo">
+            </div>
+            <div class="user-name">Welcome, {{ user.first_name }}</div>
+        </div>
+        <div class="user-options">
+            <!--<div class="user-option">
+                <a href="edit_vendor_details">Edit Profile</a>
+            </div>
+             Add more user options as needed -->
+        </div>
+        <div class="profile-details">
+            <h2>About Me</h2>
+            <div class="user-details-container">
+                <div class="user-info">Email: {{ user.email }}</div>
+                <div class="user-info">Username: {{ user.username }}</div>
+                <div class="user-info">First Name: {{ user.first_name }}</div>
+                <div class="user-info">Last Name: {{ user.last_name }}</div>
+                <!-- Add more user details as needed based on your VendorDetails model -->
+            </div>
+        </div>
+    </div>
+</body>
+</html>

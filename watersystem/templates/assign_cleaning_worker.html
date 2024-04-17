@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        form {
+            margin: 20px;
+        }
+
+        input[type="hidden"],
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h2>Assign Cleaning Worker</h2>
+    <form method="post" action="{% url 'assign_cleaning_worker' district=district %}">
+        {% csrf_token %}
+        <input type="hidden" name="service_request_id" value="{{ service_request.Request_id }}">
+        
+        <!-- Include only one form for worker selection -->
+        {{ form.as_p }}
+        
+        <button type="submit">Assign Selected Workers</button>
+    </form>
+</body>
+</html>

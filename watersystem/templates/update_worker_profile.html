@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Worker Profile Update</title>
+    <style>
+        /* CSS Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+        }
+
+        h2 {
+            text-align: center;
+            color: #007BFF;
+        }
+
+        form {
+            width: 60%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="file"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        select {
+            height: 36px;
+        }
+
+        textarea {
+            height: 100px;
+        }
+
+        input[type="checkbox"] {
+            margin-top: 10px;
+        }
+
+        button {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .messages {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #dff0d8;
+            border: 1px solid #3c763d;
+            color: #3c763d;
+            border-radius: 4px;
+        }
+
+        .messages.error {
+            background-color: #f2dede;
+            border: 1px solid #a94442;
+            color: #a94442;
+        }
+    </style>
+</head>
+<body>
+    <h2>Worker Profile Update</h2>
+    <form action="{% url 'update_worker_profile' %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <!-- Worker Information -->
+        <label for="profile_picture">Profile Picture:</label>
+        <input type="file" id="profile_picture" name="profile_picture">
+
+        <label for="gender">Gender:</label>
+        <select id="gender" name="gender">
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+        </select>
+
+        <label for="mobile_number">Mobile Number:</label>
+        <input type="text" id="mobile_number" name="mobile_number" placeholder="Your mobile number">
+
+        <label for="district">District:</label>
+<select id="district" name="district">
+    <option value="" selected disabled>Select your district</option>
+    <option value="2">Thiruvananthapuram</option>
+    <option value="3">Kollam</option>
+    <option value="4">Pathanamthitta</option>
+    <option value="5">Alapuzha</option>
+    <option value="6">Kottayam</option>
+    <option value="7">Idukki</option>
+    <option value="8">Ernakulam</option>
+    <option value="1">Thrissur</option>
+    <option value="9">Palakkad</option>
+    <option value="10">Malappuram</option>
+    <option value="11">Kozhikode</option>
+    <option value="12">Wayanad</option>
+    <option value="13">Kannur</option>
+    <option value="14">Kasaragod</option>
+</select>
+
+        <label for="bio">Bio/Description:</label>
+        <textarea id="bio" name="bio" rows="4"></textarea>
+
+       <!-- Services -->
+<label for="services">Services:</label>
+<select id="services" name="services">
+    <option value="" selected disabled>Select the service</option>
+    
+    <option value="water_resources_cleaning">Water Resources Cleaning</option>
+    <option value="water_service">Water Service</option>
+    <!-- Add more options as needed -->
+</select>
+        <label for="experience">Experience:</label>
+        <input type="text" id="experience" name="experience" placeholder="Years of experience in this field">
+
+        <label for="availability">Availability:</label>
+        <input type="text" id="availability" name="availability" placeholder="Your availability schedule (e.g., weekdays, weekends, etc)">
+
+        <input type="checkbox" id="terms" name="terms" required>
+        <label for="terms">I accept the <a href="terms.html">Terms and Conditions</a></label>
+
+        <button type="submit">Update Profile</button>
+    </form>
+
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li class="{{ message.tags }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html>

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Detail</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            background-color: #ffffff; /* White background */
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+            align-items: flex-start;
+        }
+
+        .product-container {
+            display: flex;
+            justify-content: space-between;
+            margin: 50px 0;
+        }
+
+        nav {
+            background-color: #e0e0e0; /* Slightly darker shade of white */
+            padding: 30px 10px;
+            width: 100%;
+            text-align: center;
+        }
+
+        nav a {
+            color: #000000; /* Black text color */
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+            font-size: 16px;
+            transition: color 0.3s ease-in-out;
+        }
+
+        nav a:hover {
+            color: #007bff; /* Hover color matches the primary color */
+        }
+
+        .image-container {
+            width: 45%; /* Adjust as needed */
+            box-sizing: border-box;
+        }
+
+        .details-container {
+            width: 50%; /* Adjust as needed */
+            box-sizing: border-box;
+            padding: 20px;
+        }
+
+        .product-container img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .strikethrough {
+            text-decoration: line-through;
+            color: #777; /* You can customize the color as well */
+        }
+
+        .description-box {
+            background-color: rgba(255, 255, 255, 0.8); /* Adjust the transparency and color as needed */
+            padding: 25px;
+            border-radius: 8px;
+            margin-top: 20px;
+            width: 80%; /* Adjust the width as needed */
+        }
+
+        .product-name {
+            font-size: 28px; /* Adjust the font size as needed */
+            color: #333; /* You can customize the color as well */
+            margin-bottom: 10px;
+        }
+
+        .offer-price {
+            font-size: 24px; /* Adjust the font size as needed */
+            color: #333; /* You can customize the color as well */
+            margin-bottom: 20px;
+        }
+
+        .buttons-container {
+            margin-top: 10px;
+            margin-right:170px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .action-button {
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            padding: 15px 170px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: background-color 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .action-button:hover {
+            background-color: #45a049;
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .buy-now-button
+        {
+            background-color: #3457D5; /* Change the color code as needed */
+        }
+
+       
+        .add-to-cart-button {
+            background-color: #1F75FE; /* Change the color code as needed */
+        }
+
+        .buy-now-button:hover,
+        .add-to-cart-button:hover {
+            background-color: #2980b9; /* Change the hover color code as needed */
+        }
+
+        @media (max-width: 768px) {
+            /* Responsive styles... */
+            .product-container {
+                flex-direction: column;
+            }
+
+            .image-container,
+            .details-container {
+                width: 100%;
+            }
+
+            .description-box {
+                width: 100%; /* Make it full width on smaller screens if desired */
+            }
+        }
+        .cart-icon {
+            display: inline-block;
+            position: relative;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 50%;
+            padding: 4px 8px;
+            font-size: 12px;
+        }
+        .add-to-cart-btn {
+            background-color: #007bff; /* Button background color */
+            color: #fff; /* Button text color */
+            border: none;
+            padding: 15px 30px; /* Adjust padding as needed */
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s, box-shadow 0.3s;
+            width: auto; /* Set width to auto to allow button to expand */
+            margin-left: auto; /* Push the button to the right */
+            margin-right: 15px; /* Add margin to the right for spacing */
+        }
+        
+        .add-to-cart-btn:hover {
+            background-color: #0056b3; /* Button background color on hover */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        
+    </style>
+</head>
+<body>
+    
+    <!-- Navigation Bar -->
+    <nav>
+        <a href="http://127.0.0.1:8000/services.html">Home</a>
+        <a href="http://127.0.0.1:8000/products_users.html">Products</a>
+        <a href="http://127.0.0.1:8000/about.html">About Us</a>
+        
+        <!-- Add more links as needed -->
+        <a href="{% url 'cart' %}">
+            <i class="fa fa-shopping-cart"></i> Cart
+            {% if cart_count > 0 %}
+                <span class="cart-count">{{ cart_count }}</span>
+            {% endif %}
+        </a>
+       
+        {% if user.is_authenticated %}
+            <div class="cart-icon">
+                
+                {% if cart_count == 0 %}
+                    <span></span>
+                {% else %}
+                    <span class="cart-count">{{ cart_count }}</span>
+                {% endif %}
+            </div>
+        {% endif %}
+        <!-- Add more links as needed -->
+    </nav>
+
+
+    <div class="product-container">
+        <div class="image-container">
+            <img class="product-image" src="{{ product.image.url }}" alt="{{ product.name }} Image">
+        </div>
+        <div class="details-container">
+            <!-- Use the product-name class for the product name -->
+            <p class="product-name"><strong>{{ product.name }}</strong></p>
+            <p><strong>Brand:</strong> {{ product.brand }}</p>
+            <!-- Apply strikethrough to the price -->
+            <p> <span class="strikethrough">Rs.{{ product.price }}</span></p>
+            <p class="offer-price"><strong> Rs.{{ product.offer }}</strong></p>
+            <p><strong>Status:</strong> {% if product.stock_quantity > 0 %} In Stock {% else %} Out of Stock {% endif %}</p>
+            <div class="quantity-controls">
+                <button class="quantity-btn" onclick="decreaseQuantity()">-</button>
+                <input type="number" id="quantityInput" min="1" value="1">
+                <button class="quantity-btn" onclick="increaseQuantity()">+</button>
+            </div>
+            <div class="description-box">
+                <p><strong>Description:</strong> {{ product.description }}</p>
+            </div>
+            <form action="{% url 'add-to-cart' product.id %}" method="post">
+                {% csrf_token %}
+                <button class="add-to-cart-btn">Add to Cart</button>
+            </form>
+           
+            
+        </div>
+    </div>
+
+    <script>
+        function decreaseQuantity() {
+            var quantityInput = document.getElementById('quantityInput');
+            var quantity = parseInt(quantityInput.value);
+            if (quantity > 1) {
+                quantityInput.value = quantity - 1;
+                document.getElementById('quantity').value = quantity - 1; // Update hidden input field value
+            }
+        }
+
+        function increaseQuantity() {
+            var quantityInput = document.getElementById('quantityInput');
+            var quantity = parseInt(quantityInput.value);
+            quantityInput.value = quantity + 1;
+            document.getElementById('quantity').value = quantity + 1; // Update hidden input field value
+        }
+    </script>
+
+    
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Last Inserted Details</title>
+    <!-- Add any CSS styles or external stylesheets here -->
+</head>
+<body>
+    <h1>Last Inserted Details</h1>
+    {% if delivery_address %}
+        <p><strong>Name:</strong> {{ delivery_address.name }}</p>
+        <p><strong>Phone Number:</strong> {{ delivery_address.phone_number }}</p>
+        <p><strong>Pincode:</strong> {{ delivery_address.pincode }}</p>
+        <p><strong>Locality:</strong> {{ delivery_address.locality }}</p>
+        <p><strong>Address:</strong> {{ delivery_address.address }}</p>
+        <p><strong>City:</strong> {{ delivery_address.city }}</p>
+        <p><strong>District:</strong> {{ delivery_address.district }}</p>
+        {% if delivery_address.landmark %}
+            <p><strong>Landmark:</strong> {{ delivery_address.landmark }}</p>
+        {% endif %}
+        {% if delivery_address.alternate_phone_number %}
+            <p><strong>Alternate Phone Number:</strong> {{ delivery_address.alternate_phone_number }}</p>
+        {% endif %}
+        <p><strong>Address Type:</strong> {{ delivery_address.get_address_type_display }}</p>
+    {% else %}
+        <p>No delivery address found for the logged-in user.</p>
+    {% endif %}
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment History</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f8f8f8;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        div {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        h3 {
+            color: #007bff;
+        }
+
+        p {
+            margin: 8px 0;
+        }
+
+        .pay-button {
+            background-color: #007bff;
+            color: #fff;
+            font-size: 14px;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .pay-button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Additional styles can be added as needed */
+    </style>
+</head>
+<body>
+
+    <h2>Payment History</h2>
+
+    {% if payment_details %}
+        {% for payment_info in payment_details %}
+            <div>
+                <h3>Order {{ payment_info.order_assignment.order.id }}</h3>
+                <p>Service: {{ payment_info.order_assignment.order.service }}</p>
+                <p>Payment Status: {{ payment_info.payment_status }}</p>
+                <p>Price: {{ payment_info.price }}</p>
+
+                <!-- Razorpay Payment Button -->
+                <form action="{% url 'razorpay_payment' %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="order_id" value="{{ payment_info.order_assignment.order.id }}">
+                    <input type="hidden" name="amount" value="{{ payment_info.price }}">
+                    <button type="submit" class="pay-button">Pay</button>
+                </form>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No payment history found.</p>
+    {% endif %}
+
+</body>
+</html>

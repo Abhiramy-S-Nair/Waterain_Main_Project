@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Order Address</title>
+</head>
+<body>
+    <h1>Create Order Address</h1>
+    <p>Order Details:</p>
+    <p>Order ID: {{ order.order_id }}</p>
+    <!-- Display other order details as needed -->
+
+    <p>Address Details:</p>
+    <p>Address ID: {{ address.address_id }}</p>
+    <!-- Display other address details as needed -->
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save</button>
+    </form>
+</body>
+</html>

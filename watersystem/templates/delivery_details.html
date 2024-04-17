@@ -1,0 +1,147 @@
+<!-- delivery_app/templates/delivery_details.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Delivery Boy Details</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        h2 {
+            color: #333;
+            text-align: center;
+            margin-top:-280px;
+        }
+
+        .table-container {
+            width: 80%;
+            margin: 20px auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        td {
+            background-color: #fff;
+        }
+
+        img {
+            max-width: 50px;
+            height: auto;
+            border-radius: 50%;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+
+        .accept-button, .delete-button {
+            padding: 8px 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .accept-button {
+            background-color: #28a745;
+            color: #fff;
+        }
+
+        .delete-button {
+            background-color: #dc3545;
+            color: #fff;
+        }
+    
+    </style>
+</head>
+<body>
+    <div class="table-container">
+        <h2>Delivery Boy Details</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Full Name</th>
+                    <th>Email</th>
+                    <th>Phone Number</th>
+                    <th>Date of Birth</th>
+                    <th>Gender</th>
+                    <th>Address</th>
+                    <th>Pincode</th>
+                    <th>Profile Photo</th>
+                    <th>Driving License</th>
+                    <th>Identity Proof</th>
+                  <!--  <th>Action</th>  --><!-- New column for buttons -->
+                </tr>
+            </thead>
+            <tbody>
+                {% for delivery_boy in delivery_boys %}
+                <tr>
+                    <td>{{ delivery_boy.full_name }}</td>
+                    <td>{{ delivery_boy.email }}</td>
+                    <td>{{ delivery_boy.phone_number }}</td>
+                    <td>{{ delivery_boy.date_of_birth }}</td>
+                    <td>{{ delivery_boy.gender }}</td>
+                    <td>{{ delivery_boy.address }}</td>
+                    <td>{{ delivery_boy.pincode }}</td>
+                    <td><img src="{{ delivery_boy.profile_photo.url }}" alt="Profile Photo"></td>
+                    <td><a href="{{ delivery_boy.driving_license.url }}" target="_blank">View</a></td>
+                    <td><a href="{{ delivery_boy.identity_proof.url }}" target="_blank">View</a></td>
+                    <!--<td class="action-buttons">
+                        <button class="accept-button" onclick="acceptDeliveryBoy({{ delivery_boy.id }})">Accept</button>
+                        <button class="delete-button" onclick="deleteDeliveryBoy({{ delivery_boy.id }})">Delete</button>
+                    </td>-->
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        function acceptDeliveryBoy(deliveryBoyId) {
+            // Implement your logic for accepting a delivery boy
+            console.log('Accepted delivery boy with ID:', deliveryBoyId);
+        }
+
+        function deleteDeliveryBoy(deliveryBoyId) {
+            // Implement your logic for deleting a delivery boy
+            console.log('Deleted delivery boy with ID:', deliveryBoyId);
+        }
+    </script>
+</body>
+</html>

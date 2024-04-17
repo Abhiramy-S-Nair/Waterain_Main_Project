@@ -1,0 +1,19 @@
+<!-- delivery_boys_list.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delivery Boys List</title>
+</head>
+<body>
+    <h1>Delivery Boys List</h1>
+    <ul>
+        {% for delivery_boy in delivery_boys %}
+            <li>{{ delivery_boy.user.username }}</li>
+            <!-- Add other details like profile photo, etc. if needed -->
+        {% endfor %}
+    </ul>
+</body>
+</html>

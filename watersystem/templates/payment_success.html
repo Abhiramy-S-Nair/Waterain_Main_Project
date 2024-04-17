@@ -1,0 +1,12 @@
+<!-- payment_success.html -->
+{% load static %}
+{% block content %}
+<div class="container">
+    <h1>Payment Successful</h1>
+    <p>Thank you for your payment. Your order has been successfully placed.</p>
+    <p>Order ID: {{ order_payment.id }}</p>
+    <p>Total Amount: Rs. {{ order_payment.total_amount }}</p>
+    <p>Delivery Address: {{ order_payment.delivery_address }}</p>
+    <p>Payment Status: {{ order_payment.payment_status }}</p>
+</div>
+{% endblock %}

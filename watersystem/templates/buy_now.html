@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buy Now</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 150vh;
+        }
+
+        .container {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 100%;
+            max-width: 1000px; /* Adjust as needed */
+            text-align: center;
+        }
+
+        h2 {
+            color: #333;
+            margin-top: 0;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        strong {
+            color: #333;
+            font-size: 18px;
+        }
+
+        p {
+            margin-bottom: 10px;
+        }
+
+        a {
+            text-decoration: none;
+            display: inline-block;
+            padding: 12px 25px;
+            border-radius: 5px;
+            margin-top: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+            color: #fff;
+            background-color: #e0e0e0; /* Button color */
+        }
+
+        a:hover {
+            background-color: #e0e0e0; /* Hover background color */
+        }
+
+        .add-address-btn {
+            background-color: #28a745; /* Custom color for "Add New Address" button */
+        }
+
+        .add-address-btn:hover {
+            background-color: #218838; /* Hover color for "Add New Address" button */
+        }
+        
+        .continue-btn {
+            background-color: #dc3545; /* Custom color for "Continue" button */
+        }
+
+        .continue-btn:hover {
+            background-color: #c82333; /* Hover color for "Continue" button */
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #e0e0e0; /* Slightly darker shade of white */
+            padding: 30px 10px;
+            width: 100%;
+            text-align: center;
+            text-decoration: none; /* Remove underlines from all links in the nav */
+        }
+        
+        nav a {
+            color: #000000; /* Black text color */
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+            font-size: 16px;
+            transition: color 0.3s ease-in-out;
+        }
+        
+        nav a:hover {
+            color: #007bff; /* Hover color matches the primary color */
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="http://127.0.0.1:8000/services.html">Home</a>
+        <a href="http://127.0.0.1:8000/products_users.html">Products</a>
+        <a href="about.html">About Us</a>
+        <a href="{% url 'view_cart' %}">Cart</a>
+        <!-- Add more links as needed -->
+    </nav><br><br>
+
+    <div class="container">
+        <h2>Buy Now</h2>
+        <img src="{{ product.image.url }}" alt="{{ product.name }} Image">
+        <p><strong>Product Name:</strong> {{ product.name }}</p>
+        <p><strong>Offer Price:</strong> Rs.{{ product.offer }}</p>
+
+        <p>Continue to checkout or add a new address:</p>
+        
+        <!-- Provide a link to add a new delivery address with the product ID and quantity as parameters -->
+        <a href="{% url 'add_delivery_address' pk=product.pk %}?quantity={{ quantity }}" class="add-address-btn">Add New Address</a>
+
+        <!-- Add your actual link or action here for the checkout process -->
+        <a href="#" class="continue-btn">Continue</a>
+    </div>
+
+</body>
+</html>

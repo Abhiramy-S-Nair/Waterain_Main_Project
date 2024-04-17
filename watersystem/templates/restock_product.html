@@ -1,0 +1,118 @@
+<!-- restock_product.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restock Product</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1D3D60, #1a1a1a);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            color: #fff;
+        }
+
+        .container {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 250px; /* Adjusted width */
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #000; /* Set text color to black */
+        }
+
+        form {
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input {
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #000; /* Set border color to black */
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            box-sizing: border-box; /* Include padding in the width */
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #1D3D60, #0056b3);
+            color: #fff;
+            text-decoration: none;
+            border: none;
+            border-radius: 8px;
+            margin-top: 20px;
+            cursor: pointer;
+            transition: background 0.3s ease-in-out;
+        }
+
+        button:hover {
+            background: linear-gradient(135deg, #0056b3, #004080);
+        }
+
+        a {
+            display: block;
+            text-align: center;
+            padding: 10px;
+            background: linear-gradient(135deg, #1D3D60, #0056b3);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 8px;
+            margin-top: 20px;
+            transition: background 0.3s ease-in-out;
+        }
+
+        a:hover {
+            background: linear-gradient(135deg, #0056b3, #004080);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #007bff;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>{{ product.name }}</h2>
+        <form method="post" action="{% url 'restock_product' pk=product.pk %}">
+            {% csrf_token %}
+            <label for="restock_quantity">Restock Quantity:</label>
+            <input type="number" name="restock_quantity" min="1" required>
+            <button type="submit">Restock</button>
+        </form>
+        <a href="{% url 'view_products' %}">Back to Product List</a>
+        
+    </div>
+</body>
+</html>

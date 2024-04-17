@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Razorpay Payment</title>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Payment</h1>
+        <button id="rzp-button">Pay with Razorpay</button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var options = {
+                "key": "{{ rzp_test_dLQYIpahEMwuTM }}", // Use your Razorpay API key here
+                "amount": "{{ razorpay_order.amount }}",
+                "currency": "{{ razorpay_order.currency }}",
+                "name": "Waterain",
+                "description": "Payment for Order",
+                "handler": function (response) {
+                    // Redirect to payment success URL
+                    window.location.href = "{% url 'payment_success' %}?razorpay_payment_id=" + response.razorpay_payment_id;
+                },
+                "prefill": {
+                    "name": "{{ request.user.username }}",
+                    "email": "{{ request.user.email }}"
+                },
+                "theme": {
+                    "color": "#F37254"
+                }
+            };
+
+            var rzp = new Razorpay(options);
+
+            document.getElementById('rzp-button').addEventListener('click', function(e) {
+                rzp.open();
+                e.preventDefault();
+            });
+        });
+    </script>
+</body>
+</html>

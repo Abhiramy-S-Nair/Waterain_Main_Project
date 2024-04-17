@@ -1,0 +1,59 @@
+<!-- prediction_result.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Water Quality Prediction Result</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 100px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        p {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .result {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .good {
+            color: green;
+        }
+
+        .not-good {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Water Quality Prediction Result</h1>
+        <div class="result">
+            <p>Probability of water being potable: {{ result }}</p>
+            <p>Water quality: {% if water_quality|lower == 'good to use' %}<span class="good">Good for drinking</span>{% else %}<span class="not-good">Not suitable for drinking</span>{% endif %}</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!-- vendor_details.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vendor Details</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>Vendor Details</h1>
+    
+    <table>
+        <tr>
+            <th>User</th>
+            <th>Phone Number</th>
+            <th>GST Number</th>
+            <th>Profile Photo</th>
+            <th>Identity Proof</th>
+        </tr>
+
+        {% for vendor_details in vendor_details_list %}
+            <tr>
+                <td>{{ vendor_details.user.username }}</td>
+                <td>{{ vendor_details.phone_number }}</td>
+                <td>{{ vendor_details.gst_number }}</td>
+                <td><img src="{{ vendor_details.profile_photo.url }}" alt="Profile Photo"></td>
+                <td><a href="{{ vendor_details.identity_proof.url }}" target="_blank">View Identity Proof</a></td>
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

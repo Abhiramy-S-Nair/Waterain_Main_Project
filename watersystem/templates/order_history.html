@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order History</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        td {
+            background-color: #fff;
+        }
+
+        h3 {
+            color: #007bff;
+        }
+
+        p {
+            margin: 0 0 10px;
+        }
+
+        h4 {
+            color: #28a745;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+
+  <h2>Order History</h2>
+
+  {% if order_details %}
+    {% for order_info in order_details %}
+      <div>
+        <h3>Order {{ order_info.order.id }}</h3>
+        <p>Service: {{ order_info.order.service }}</p>
+        <p>Status: {{ order_info.order.get_status_display }}</p>
+        <a href="{% url 'payment_history' %}">
+          <button>Payment Details</button>
+        </a>
+
+        <h4>Assigned Workers:</h4>
+        <table>
+          <thead>
+            <tr>
+              <th>Username</th>
+              <th>Mobile Number</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for assigned_worker in order_info.assigned_workers %}
+              <tr>
+                <td>{{ assigned_worker.worker.user.username }}</td>
+                <td>{{ assigned_worker.worker.mobile_number }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    {% endfor %}
+  {% else %}
+    <p>No order history found.</p>
+  {% endif %}
+
+</body>
+</html>

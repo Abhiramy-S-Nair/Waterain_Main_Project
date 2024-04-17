@@ -1,0 +1,257 @@
+{%load static%}
+   <!doctype html>
+        <html lang="en">
+        <head>
+            <style>
+        
+                    .logout-button {
+                        display: block;
+                        padding: 10px 20px; /* Adjust the padding to your preference */
+                        background-color:#007BFF ; /* Background color of the button */
+                        color: #fff; /* Text color */
+                        text-align: center;
+                        text-decoration: none;
+                        border: none;
+                        border-radius: 5px; /* Rounded corners */
+                        cursor: pointer;
+                    }
+                
+                    /* Hover effect */
+                    .logout-button:hover {
+                        background-color: #E94C26; /* Change the background color on hover */
+                    }
+                </style>
+                
+              
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+            <title>Waterain</title>
+            <link rel="shortcut icon" href="{% static 'assets/images/fav.png'%}" type="image/x-icon">
+           
+            <link rel="shortcut icon" href="{% static 'assets/images/fav.png'%}">
+            <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css'%}">
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+            <link rel="stylesheet" href="{% static 'assets/plugins/testimonial/css/owl.carousel.min.css'%}">
+            <link rel="stylesheet" href="{% static 'assets/plugins/testimonial/css/owl.theme.min.css'%}">
+            <link rel="stylesheet" type="text/css" href="{% static 'assets/css/style.css'%}" />
+            <link rel="stylesheet" href="{% static 'assets/css/animate.min.css'%}">
+            
+        </head>
+        <body class="bg-white">
+          <header>
+                <div id="menu-jk" class="nav-part shadow-md bg-white navcol">
+                    <div class="container-lg">
+                        <div class="row  p-2">
+                            <div class="col-lg-3 p-2">
+                               <a href="index.html">
+                               <img class="max-230" src="{% static 'assets/images/log.jpg'%}" alt="">
+                                </a>
+                                 <a  data-bs-toggle="collapse" data-bs-target="#menu" class="float-end d-lg-none pt-1 ps-3"><i class="bi pt-1 fs-1 cp bi-list"></i></a>
+                            </div>
+                            <div id="menu" class="col-lg-9 d-none pt-1 d-lg-block">
+                                <ul class="fw-bold nacul fs-7">
+                                    <li class="float-start p-3 px-4"><a href="index.html">Home</a></li>
+                                    <li class="float-start p-3 px-4"><a href="about.html">About Us</a></li>
+                                    <!--<li class="float-start p-3 px-4"><a href="products_users.html">products</a></li>
+                                    <li class="float-start p-3 px-4"><a href="blog.html">blog</a></li>-->
+                                    <li class="float-start p-3 px-4"><a href="contact.html">Contact Us</a></li>
+                                    <li class="float-end d-none d-md-block pt-2">
+                                        <!-- User icon with username -->
+                                        <div class="user-dropdown">
+                                            <div class="dropdown">
+                                                <a href="userprofile.html" button class="user-icon">
+                                                    <i class="bi bi-person"></i> <!-- Replace with your user icon or image -->
+                                                    {{ user.username }} <!-- Display the username here -->
+                                                </button>
+                                                <div class="dropdown-content">
+                                                    
+                                                    <a href="{% url 'logout' %}" class="logout-button">Logout</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                   <!---- <li class="float-end d-none d-md-block pt-2">
+                                        <button class="btn fw-bolder px-4 py-2 btn-primary"><a href="booking.html">Send a Request</a></button>
+                                    </li>-->
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header><br><br><br>
+           
+            
+            
+            <!-- ##################### Why Choos US #################### -->
+             <div class="container-fluid products bg-gray big-padding pt-3">
+               <div class="container-xl">
+                   <div class="section-title row">
+                        <h2 class="fs-1 fw-bold">Our Services</h2>
+                        
+                    </div>
+                   <div class="row mt-5">
+                       <div class="col-lg-4 mb-4 col-md-6">
+                        <a href="submit_order">
+                           <div class="cover text-center p-4 shadow-md bg-white">
+                               <img class="w-125" src="{% static 'assets/images/services/002-drink-water.png'%}" alt="">
+                               <h2 class="fs-4 fw-bolder mt-4">Water, Where You Want It.</h2>
+                               <p> With our service, you can enjoy the luxury of clean, crisp water exactly where and when you need it, elevating your daily hydration experience. </p>
+                               <a href="book.html" ></a>
+                           </div>
+                       </div>
+                       <div class="col-lg-4 mb-4 col-md-6">
+                       <a href = "products_users.html">
+                           <div class="cover text-center p-4 shadow-md bg-white">
+                               <img class="w-125" src="{% static 'assets/images/services/shopping.png'%}" alt="">
+                               <h2 class="fs-4 fw-bolder mt-4">AquaHub</h2>
+                               <p>Dive into purity and sustainability with AquaHub – your trusted source for premium water solutions, where every drop matters  </p>
+                               <a href="products_users.html" class="arrow4"></a>
+                           </div>
+                       </div>
+                        <!--<div class="col-lg-4 mb-4 col-md-6">
+                           <div class="cover text-center p-4 shadow-md bg-white">
+                               <img class="w-125" src="{% static 'assets/images/services/water-heater.png'%}" alt="">
+                               <h2 class="fs-4 fw-bolder mt-4"> Effective Water Crisis Solutions</h2>
+                               <p>designed to tackle scarcity and contamination head-on, ensuring clean and accessible water for all. </p>
+                               <a href="blog.html" class="arrow2">&#8594;</a>
+                           </div>
+                       </div>-->
+                       <!--<div class="col-lg-4 mb-4 col-md-6">
+                           <div class="cover text-center p-4 shadow-md bg-white">
+                            <a href="service_users.html">
+                               <img class="w-125" src="{% static 'assets/images/services/water-tap.png'%}" alt="">
+                               <h2 class="fs-4 fw-bolder mt-4">Aquatic Ecosystem Restoration</h2>
+                               <p> Through advanced technologies and responsible stewardship, we're actively working to restore and protect our precious water resources.</p>
+                               <a href="service_users.html" class="arrow3"></a>
+                           </div>
+                       </div>-->
+                       <div class="col-lg-4 mb-4 col-md-6">
+                        <a href = "http://127.0.0.1:8000/view_uploaded_files/">
+                        
+                           <div class="cover text-center p-4 shadow-md bg-white">
+                               <img class="w-125" src="{% static 'assets/images/services/001-save-water.png'%}" alt="">
+                               <h2 class="fs-4 fw-bolder mt-4">Public Awareness </h2>
+                               <p> serve as powerful tools to inform, engage, and empower individuals and communities. driving positive change and progress.</p>
+                               <a href="blog.html" class="arrow4"></a>
+                           </div>
+                          
+                       </div>
+                      <div class="col-lg-4 mb-4 col-md-6">
+                        <a href = "http://127.0.0.1:8000/predict/">
+                           <div class="cover text-center p-4 shadow-md bg-white">
+                               <img class="w-125" src="{% static 'assets/images/services/ph.png'%}" alt="">
+                               <h2 class="fs-4 fw-bolder mt-4">Monitoring Water Health</h2>
+                               <p>crucial for assessing the safety and purity of our water sources.water quality testing services provide accurate results  ensuring that your water meets the highest standards of health and safety.</p>
+                               
+
+                           </div>
+                       </div>
+                       
+                   </div>
+               </div>
+           </div>
+           
+           
+          
+            <!--- ############ Footer Starts Here ################## -->
+         <footer>
+            <div class="inner">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-3 foot-about">
+                            <h4>About US</h4>
+
+                            <p>By being a part of Waterain, you're contributing to a brighter future</p>
+
+                            <ul>
+                                <li>23 Rose Stren Kottayam</li>
+                                <li>waterain@gmail.com</li>
+                                <li>+91 876 766 554</li>
+                            </ul>
+                        </div>
+
+                        <div class="col-md-3 foot-post">
+                            <h4>Latest Posts</h4>
+
+                            <div class="post-row">
+                                <div class="image">
+                                    <img src="{% static 'assets/images/album/a6.jpg'%}" alt="">
+                                </div>
+                                <div class="detail">
+                                    <p>Water Bank: Revolutionizing Access to Clean Water </p>
+                                </div>
+                            </div>
+
+                            <div class="post-row">
+                                <div class="image">
+                                    <img src="{% static 'assets/images/album/a5.jpg'%}" alt="">
+                                </div>
+                                <div class="detail">
+                                    <p>The Impact of Water Resource Cleaning: A Closer Look </p>
+                                </div>
+                            </div>
+
+                            <div class="post-row">
+                                <div class="image">
+                                    <img src="{% static 'assets/images/album/a4.jpg'%}" alt="">
+                                </div>
+                                <div class="detail">
+                                    <p>Sustainable Water Management: A Key to a Greener Future</p>
+                                </div>
+                            </div>
+                        </div>
+
+                       <!----<div class="col-md-3 foot-services">
+                            <h4>Top Category</h4>
+
+                            <ul>
+                                <li><a href="">Target Statergy</a></li>
+                                <li><a href="">Web Analytics</a></li>
+                                <li><a href="">Page Monitering</a></li>
+                                <li><a href="">Page Optimization</a></li>
+                                <li><a href="">Target Statergy</a></li>
+                                <li><a href="">Email Marketing</a></li>
+                            </ul>
+                        </div>-->
+
+                        <div class="col-md-3 foot-news">
+                            <h4>News Letter</h4>
+                            <p>As we continue our journey toward sustainable water management and conservation, we're excited to share the latest updates and initiatives from Waterain</p>
+
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control mb-0" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                                <div class="input-group-append">
+                                    <span class="input-group-text bg-primary" id="basic-addon2"><i class="bi text-white bi-send"></i></span>
+                                </div>
+                            </div>
+
+                            <ul>
+                                <li><i class="bi bi-facebook"></i></li>
+                                <li><i class="bi bi-twitter"></i></li>
+                                <li><i class="bi bi-instagram"></i></li>
+                                <li><i class="bi bi-linkedin"></i></li>
+                                <li><i class="bi bi-pinterest"></i></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <div class="copy">
+            <div class="container">
+                <a href="https://www.smarteyeapps.com/"></a>
+
+              
+            </div>
+        </div>
+
+
+        </body>
+        <script src="{% static 'assets /js/jquery-3.2.1.min.js'%}"></script>
+        <script src="{% static 'assets /js/popper.min.js'%}"></script>
+        <script src="{% static 'assets /js/bootstrap.bundle.min.js'%}"></script>
+        <script src="{% static 'assets /plugins/scroll-fixed/jquery-scrolltofixed-min.js'%}"></script>
+        <script src="{% static 'assets /plugins/testimonial/js/owl.carousel.min.js'%}"></script>
+        <script src="{% static 'assets /js/script.js'%}"></script>
+
+    </html>

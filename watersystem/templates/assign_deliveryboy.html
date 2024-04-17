@@ -1,0 +1,22 @@
+<!-- assign_deliveryboy.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assign Delivery Boy</title>
+</head>
+<body>
+    <h1>Assign Delivery Boy</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for="delivery_boy">Select Delivery Boy:</label>
+        <select name="delivery_boy" id="delivery_boy">
+            {% for delivery_boy in delivery_boys %}
+                <option value="{{ delivery_boy.id }}">{{ delivery_boy.user.username }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Assign Delivery Boy</button>
+    </form>
+</body>
+</html>

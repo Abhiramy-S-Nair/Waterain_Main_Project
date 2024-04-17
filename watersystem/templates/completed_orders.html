@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Completed Orders</title>
+    <!-- Add your CSS styles if needed -->
+</head>
+
+<body>
+
+    <h2>Completed Orders</h2>
+
+    {% if completed_orders %}
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>User</th>
+                    <th>Service</th>
+                    <th>Payment Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in completed_orders %}
+                    <tr>
+                        <td>{{ order.id }}</td>
+                        <td>{{ order.user.username }}</td>
+                        <td>{{ order.get_service_display }}</td>
+                        <td>{{ order_payment_mapping.get(order.id, "N/A") }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No completed orders found.</p>
+    {% endif %}
+
+</body>
+
+</html>

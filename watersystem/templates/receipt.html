@@ -1,0 +1,69 @@
+<!-- receipt.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Receipt</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .receipt {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .receipt h1 {
+            text-align: center;
+        }
+        .receipt-content {
+            margin-top: 20px;
+        }
+        .receipt-item {
+            margin-bottom: 10px;
+        }
+        .receipt-item label {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="receipt">
+        <h1>Receipt</h1>
+        <div class="receipt-content">
+            <div class="receipt-item">
+                <label>Order ID:</label> {{ order.id }}
+            </div>
+            <div class="receipt-item">
+                <label>Total Amount:</label> ${{ order.total_amount }}
+            </div>
+            <div class="receipt-item">
+                <label>User:</label> {{ order.user.username }}
+            </div>
+            <div class="receipt-item">
+                <label>Email:</label> {{ order.user.email }}
+            </div>
+            <div class="receipt-item">
+                <label>Products:</label>
+                <ul>
+                    {% for order_item in order.orderitem_set.all %}
+                        <li>{{ order_item.product.name }} - ${{ order_item.product.offer }} (Quantity: {{ order_item.quantity }})</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="receipt-item">
+                <label>Payment Status:</label> {% if order.payment_status %}Paid{% else %}Pending{% endif %}
+            </div>
+            <div class="receipt-item">
+                <label>Payment ID:</label> {{ order.payment_id }}
+            </div>
+            <div class="receipt-item">
+                <label>Created At:</label> {{ order.created_at }}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        form {
+            margin: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        input[type="checkbox"] {
+            margin-right: 5px;
+        }
+
+        .assign-button {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .assign-button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h2>Assign Worker</h2>
+    <form method="post" action="{% url 'assign_worker' district.district_name %}">
+        {% csrf_token %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Select</th>
+                    <th>Worker ID</th>
+                    <th>User Name</th>
+                    <th>Gender</th>
+                    <th>Mobile Number</th>
+                    <th>Services</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for worker in available_workers %}
+                <tr>
+                    <td>
+                        <input type="checkbox" name="selected_workers" value="{{ worker.worker_id }}">
+                    </td>
+                    <td>{{ worker.worker_id }}</td>
+                    <td>{{ worker.user.username }}</td>
+                    <td>{{ worker.gender }}</td>
+                    <td>{{ worker.mobile_number }}</td>
+                    <td>{{ worker.services }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        
+        <form method="post" action="{% url 'assign_worker' district=district %}">
+            {% csrf_token %}
+            <input type="hidden" name="service_request_id" value="{{ service_request.Request_id }}">
+            {{ form.as_p }}
+            <button type="submit" class="assign-button">Assign Selected Workers</button>
+        </form>
+    </form>
+</body>
+</html>

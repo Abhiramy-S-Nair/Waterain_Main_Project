@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Delivery Address</title>
+    <!-- Add any CSS styles or external stylesheets here -->
+</head>
+<body>
+    <h1>Update Delivery Address</h1>
+    <form id="update-address-form" method="post" action="{% url 'update_delivery_address' %}">
+        {% csrf_token %}
+
+        <label for="name">Enter Your Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="phone_number">Enter Your Phone Number:</label>
+        <input type="tel" id="phone_number" name="phone_number" required>
+
+        <label for="pincode">Enter Your Pincode:</label>
+        <input type="text" id="pincode" name="pincode" required>
+
+        <label for="locality">Enter Your Locality:</label>
+        <input type="text" id="locality" name="locality" required>
+
+        <label for="address">Enter Your Detailed Address:</label>
+        <textarea id="address" name="address" required></textarea>
+
+        <!-- City Dropdown -->
+        <label for="city">Select Your City:</label>
+        <select id="city" name="city" required>
+            <option value="" disabled selected>Select your city</option>
+            {% for city in cities %}
+            <option value="{{ city.id }}">{{ city.name }}</option>
+            {% endfor %}
+        </select>
+
+        <!-- District Dropdown -->
+        <label for="district">Select Your District:</label>
+        <select id="district" name="district" required>
+            <option value="" disabled selected>Select your district</option>
+            {% for district in districts %}
+            <option value="{{ district.id }}">{{ district.name }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="landmark">Enter Nearby Landmark (optional):</label>
+        <input type="text" id="landmark" name="landmark">
+
+        <label for="alternate_phone_number">Enter Alternate Phone Number (optional):</label>
+        <input type="tel" id="alternate_phone_number" name="alternate_phone_number">
+
+        <label for="address_type">Select Address Type:</label>
+        <select id="address_type" name="address_type" required>
+            <option value="" disabled selected>Select address type</option>
+            <option value="home">Home</option>
+            <option value="work">Work</option>
+        </select>
+
+        <button type="submit">Update Address</button>
+    </form>
+
+    <!-- Add any JavaScript for validation or interactivity here -->
+</body>
+</html>

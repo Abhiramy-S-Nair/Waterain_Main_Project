@@ -1,0 +1,116 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        /* Container Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #007BFF;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        /* Form Styles */
+        label {
+            display: block;
+            margin-top: 10px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="datetime-local"],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        select#paymentMethod {
+            appearance: none;
+        }
+
+        button {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Checkbox Label Styles */
+        input[type="checkbox"] + label {
+            display: inline;
+            margin-left: 5px;
+            color: #333;
+            font-size: 16px;
+        }
+
+        /* Certificate Link Styles */
+        .certificate-link {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 16px;
+        }
+
+        .certificate-link a {
+            color: #007BFF;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .certificate-link a:hover {
+            text-decoration: underline;
+        }
+       
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+    
+    <p>Place an Order for {{ product.name }} - Price: ${{ product.price }} per unit</p>
+    <form method="post">
+       
+           
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="certificate-link">
+            <a href="{% static 'assets/images/product/waterpurityresult.pdf' %}" target="_blank" download>Download Water Quality Certificate</a>
+        </div>
+
+        <!-- Terms and Conditions -->
+        <input type="checkbox" id="terms" name="terms" required>
+        <label for="termsforwater">I accept the <a href="http://127.0.0.1:8000/termsforwater.html">Terms and Conditions</a></label>
+        <button type="submit">Place Order</button>
+        
+    </form>
+</body>
+</html>

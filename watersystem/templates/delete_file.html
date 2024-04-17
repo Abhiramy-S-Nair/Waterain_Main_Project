@@ -1,0 +1,91 @@
+<!-- watersystemapp/templates/delete_file.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete File</title>
+
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+        }
+
+        h1 {
+            color: #343a40;
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+            box-sizing: border-box;
+            margin-bottom: 20px;
+        }
+
+        button {
+            background-color: #d9534f;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        button:hover {
+            background-color: #c9302c;
+        }
+
+        a {
+            background-color: #5bc0de;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            width: 30%;
+        }
+
+        a:hover {
+            background-color: #46b8da;
+        }
+       
+    </style>
+</head>
+<body>
+    
+
+    <p><b>Are you sure you want to delete the file "{{ file.description }}"?</p></b>
+
+    <form method="post" action="">
+        {% csrf_token %}
+        <button type="submit">Delete</button>
+    </form>
+
+    <a href="{% url 'file_details' %}">Cancel</a>
+</body>
+</html>

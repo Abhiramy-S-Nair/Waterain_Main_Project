@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Delivery Address</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        .address-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .address-container p {
+            margin: 0 0 10px;
+        }
+
+        .address-container p strong {
+            font-weight: bold;
+        }
+
+        .update-address-tab {
+            cursor: pointer;
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 5px;
+            padding: 10px 20px;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .update-address-tab:hover {
+            background-color: #0056b3;
+        }
+
+        .update-address-form {
+            display: none;
+        }
+
+        .update-address-form.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <h1>User Delivery Address</h1>
+    <div class="address-container">
+        {% if delivery_address %}
+            <p><strong>Name:</strong> {{ delivery_address.name }}</p>
+            <p><strong>Phone Number:</strong> {{ delivery_address.phone_number }}</p>
+            <p><strong>Pincode:</strong> {{ delivery_address.pincode }}</p>
+            <p><strong>Locality:</strong> {{ delivery_address.locality }}</p>
+            <p><strong>Address:</strong> {{ delivery_address.address }}</p>
+            <p><strong>City:</strong> {{ delivery_address.city.city_name }}</p>
+            <p><strong>District:</strong> {{ delivery_address.district.district_name }}</p>
+            {% if delivery_address.landmark %}
+                <p><strong>Landmark:</strong> {{ delivery_address.landmark }}</p>
+            {% endif %}
+            {% if delivery_address.alternate_phone_number %}
+                <p><strong>Alternate Phone Number:</strong> {{ delivery_address.alternate_phone_number }}</p>
+            {% endif %}
+            <p><strong>Address Type:</strong> {{ delivery_address.get_address_type_display }}</p>
+        {% else %}
+            <p>No delivery address found for the logged-in user.</p>
+        {% endif %}
+    </div>
+    
+    {% comment %} <p>Click  <a href="{% url 'update_delivery_address_page' %}">here</a> to update your delivery address.</p> {% endcomment %}
+   
+</body>
+</html>

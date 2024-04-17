@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Order Confirmation</title>
+    <!-- Add your CSS styles here -->
+</head>
+<body>
+    <h1>Order Confirmation</h1>
+    <div class="container">
+        <h3>Order ID: {{ order_detail.order_id }}</h3>
+        <p>Username: {{ order_detail.user }}</p>
+        <p>Product Name: {{ order_detail.product_name }}</p>
+        <p>Product Price: {{ order_detail.product_price }}</p>
+        <p>Quantity: {{ order_detail.quantity }}</p>
+        <p>Mobile Number: {{ order_detail.mobile_number }}</p>
+        <p>Pincode: {{ order_detail.pincode }}</p>
+        <p>Locality: {{ order_detail.locality }}</p>
+        <p>Street: {{ order_detail.street }}</p>
+        <p>District: {{ order_detail.district_name }}</p>
+    </div>
+</body>
+</html>

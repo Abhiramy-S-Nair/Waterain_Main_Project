@@ -1,0 +1,82 @@
+<!-- view_stock_details.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Details</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1D3D60, #1a1a1a);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .stock-details-box {
+            background: linear-gradient(135deg, #fff, #f0f0f0);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+            color: #333;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        p {
+            margin-bottom: 30px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            background-color: #f0f0f0;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        a {
+            display: block;
+            text-align: center;
+            padding: 15px;
+            background: linear-gradient(135deg, #1D3D60, #0056b3);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 8px;
+            margin-top: 20px;
+            transition: background 0.3s ease-in-out;
+        }
+
+        a:hover {
+            background: linear-gradient(135deg, #0056b3, #004080);
+        }
+    </style>
+</head>
+<body>
+    <div class="stock-details-box">
+        <h2>{{ product.name }} - Stock Details</h2>
+        <p>In-Stock: {{ product.stock_quantity }}</p>
+        <ul>
+            {% for transaction in stock %}
+                <li>{{ transaction.timestamp|date:"Y-m-d" }} - {{ transaction.transaction_type }}: {{ transaction.quantity }}</li>
+            {% endfor %}
+        </ul>
+        <a href="{% url 'restock_product' pk=product.pk %}">Restock Product</a>
+        <a href="{% url 'view_products' %}">Back to Product List</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Delivery Boy Address</title>
+    <style>
+        /* Add your CSS styles here */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="text"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        input[type="text"]:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            border-color: #007bff;
+        }
+        button[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Add Your Address</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <!-- City Field with Validation -->
+        <label for="phone_number">Phone Number:</label>
+        <input type="text" name="phone_number" id="phone_number" required pattern="[0-9]{10}" title="Please enter a 10-digit phone number"><br>
+        
+        <label for="pincode">Pincode:</label>
+        <input type="text" name="pincode" id="pincode" required pattern="[0-9]{6}" title="Please enter a valid 6-digit pincode"><br>
+        
+        <label for="locality">Locality:</label>
+        <input type="text" name="locality" id="locality" required><br>
+        
+        <label for="address">Address:</label>
+        <textarea name="address" id="address" required></textarea><br>
+        
+        <label for="landmark">Landmark:</label>
+        <input type="text" name="landmark" id="landmark"><br>
+        
+        <label for="city">Select Your City:</label>
+        <select name="city" required>
+            <option value="" disabled selected>Select your city</option>
+            {% for city in cities %}
+                <option value="{{ city.City_ID }}">{{ city.city_name }}</option>
+            {% endfor %}
+        </select>
+        
+        <label for="district">Select Your District:</label>
+        <select name="district" required>
+            <option value="" disabled selected>Select your district</option>
+            {% for district in districts %}
+                <option value="{{ district.district_id }}">{{ district.district_name }}</option>
+            {% endfor %}
+        </select>
+        
+        <label for="alternate_phone_number">Alternate Phone Number:</label>
+        <input type="text" name="alternate_phone_number" id="alternate_phone_number"><br>
+        
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>

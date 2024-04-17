@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Worker Profiles</title>
+    <style>
+        /* Add any additional CSS styling as needed */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .assign-button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .assign-button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    {% if error_message %}
+        <p>{{ error_message }}</p>
+    {% else %}
+        <h2>All Worker Profiles</h2>
+        <table>
+            <thead>
+               
+                <tr>
+                    <th>Worker ID</th>
+                    <th>Profile Picture</th>
+                    <th>User Name</th>
+                    <th>Gender</th>
+                    <th>Mobile Number</th>
+                    <th>District</th>
+                    <th>Services</th>
+                    <th>Email</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for worker in worker_data %}
+                    <tr>
+                        <td>{{ worker.worker_id }}</td>
+                        <td><img src="{{ worker.profile_picture }}" alt="Profile Picture"></td>
+                        <td>{{ worker.username }}</td>
+                        <td>{{ worker.gender }}</td>
+                        <td>{{ worker.mobile_number }}</td>
+                        <td>{{ worker.district }}</td>
+                        <td>{{ worker.services }}</td>
+                        <td>{{ worker.email }}</td>
+                        <td>
+                            <button class="assign-button" onclick="assignWorker('{{ worker.worker_id }}')">Assign</button>
+                        </td>
+                    </tr>
+                    
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+
+    <script>
+        function assignWorker(workerId) {
+            // Handle the assignment logic here
+            alert('Assigned worker with ID ' + workerId);
+        }
+    </script>
+</body>
+</html>

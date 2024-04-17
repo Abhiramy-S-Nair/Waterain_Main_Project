@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Service Requests</title>
+    <style>
+        /* Basic CSS styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #007BFF;
+            color: #fff;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            table {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center; color: #007BFF;">Service Requests</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Request ID</th>
+                <th>User</th>
+                <th>Street</th>
+                <th>ZIP Code</th>
+                <th>Service Name</th>
+                <th>Length (feet)</th>
+                <th>Width (feet)</th>
+                <th>Water Level (feet)</th>
+                <th>City</th>
+                <th>District</th>
+                <th>Request Date & Time</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for request in service_requests %}
+            <tr>
+                <td>{{ request.Request_id }}</td>
+                <td>{{ request.user.username }}</td>
+                <td>{{ request.street }}</td>
+                <td>{{ request.zip_code }}</td>
+                <td>{{ request.service_name.name }}</td>
+                <td>{{ request.length }}</td>
+                <td>{{ request.width }}</td>
+                <td>{{ request.water_level }}</td>
+                <td>{{ request.city.city_name }}</td>
+                <td>{{ request.district.district_name }}</td>
+                <td>{{ request.request_date_time }}</td>
+                <td>
+                    <a href="{% url 'assign_cleaning_worker' district=request.district.district_name %}">Confirm</a>
+                    <span> | </span>
+                    <button>Delete</button>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

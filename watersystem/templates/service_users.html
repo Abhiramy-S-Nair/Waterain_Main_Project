@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Service Details</title>
+    <style>
+        /* Add your CSS styles here */
+        .service-list {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .service-container {
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin: 10px;
+            width: 300px;
+            background-color: #f9f9f9;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .service-container h2 {
+            font-size: 20px;
+            color: #333;
+        }
+
+        .service-container p {
+            font-size: 16px;
+            color: #666;
+        }
+
+        .book-button {
+            display: inline-block;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+
+        .book-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Service Details</h1>
+    <div class="service-list">
+        {% for service in services %}
+        <div class="service-container">
+            <h2>{{ service.name }}</h2>
+            <p>Price: ${{ service.price }}</p>
+            <a href="{% url 'cleaning' %}?service_name={{ service.name }}" class="book-button">Book Now</a>
+           
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

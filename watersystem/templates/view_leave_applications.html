@@ -1,0 +1,113 @@
+<!-- view_leave_applications.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Leave Applications</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #007BFF;
+            color: #fff;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .approve-btn, .delete-btn {
+            padding: 5px 10px;
+            cursor: pointer;
+            border: none;
+            color: #fff;
+            border-radius: 5px;
+        }
+
+        .approve-btn {
+            background-color: #4CAF50;  /* Green */
+        }
+
+        .delete-btn {
+            background-color: #f44336;  /* Red */
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center; color: #007BFF;">Leave Applications</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>User</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Reason</th>
+                <th>Medical Certificate</th>
+                <th>Status</th>
+                <th>Created At</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for application in leave_applications %}
+            <tr>
+                <td>{{ application.user.username }}</td>
+                <td>{{ application.start_date }}</td>
+                <td>{{ application.end_date }}</td>
+                <td>{{ application.reason }}</td>
+                <td>
+                    {% if application.medical_certificate %}
+                        <a href="{{ application.medical_certificate.url }}" target="_blank">View Medical Certificate</a>
+                    {% else %}
+                        No Medical Certificate
+                    {% endif %}
+                </td>
+                <td>{{ application.status }}</td>
+                <td>{{ application.created_at }}</td>
+                <td class="action-buttons">
+                    {% if application.status == 'pending' %}
+                        <form method="post" action="{% url 'approve_or_delete_leave' %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="action" value="approve">
+                            <input type="hidden" name="application_id" value="{{ application.leave_application_id }}">
+                            <button type="submit" class="approve-btn">Approve</button>
+                        </form>
+                        <form method="post" action="{% url 'approve_or_delete_leave' %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="action" value="delete">
+                            <input type="hidden" name="application_id" value="{{ application.leave_application_id }}">
+                            <button type="submit" class="delete-btn">Reject</button>
+                        </form>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uploaded Files Details</title>
+
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+        }
+
+        h1 {
+            color: #fff;
+            margin: 0;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            width: 100%;
+            margin-top: 0;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        header a {
+            text-decoration: none;
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            font-size: 18px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        a {
+            text-decoration: none;
+            padding: 5px 10px;
+            margin-right: 5px;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 3px;
+            transition: background-color 0.3s;
+        }
+
+        a:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="admindashboard.html">&#9664;</a>
+        <h1>Uploaded Files Details</h1>
+    </header>
+
+    <table>
+        <thead>
+            <tr>
+                <th>File ID</th>
+                <th>Description</th>
+                <th>PDF File</th>
+                <th>Upload Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for file in files %}
+                <tr>
+                    <td>{{ file.file_id }}</td>
+                    <td>{{ file.description }}</td>
+                    <td><a href="{{ file.pdf_file.url }}" target="_blank">View PDF</a></td>
+                    <td>{{ file.upload_date }}</td>
+                    <td>
+                        <a href="{% url 'edit_file' file.file_id %}">Edit</a>
+                        <a href="{% url 'delete_file' file.file_id %}">Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

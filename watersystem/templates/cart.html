@@ -1,0 +1,271 @@
+<!-- cart.html 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+
+        li {
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 15px;
+            margin: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            box-sizing: border-box;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        li:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        strong {
+            color: #333;
+            font-size: 20px;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        img {
+            max-width: 100%;
+            height: 150px;
+            object-fit: cover;
+            margin-top: 10px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        span {
+            display: block;
+            margin-top: 10px;
+            color: #555;
+            font-size: 16px;
+        }
+
+        .quantity-input {
+            width: 50px;
+            padding: 5px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        .remove-btn {
+            background-color: #dc3545;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .remove-btn:hover {
+            background-color: #c82333;
+        }
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #e0e0e0; /* Slightly darker shade of white */
+            padding: 30px 10px;
+            width: 100%;
+            text-align: center;
+            text-decoration: none; /* Remove underlines from all links in the nav */
+        }
+        
+        nav a {
+            color: #000000; /* Black text color */
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+            font-size: 16px;
+            transition: color 0.3s ease-in-out;
+        }
+        
+        nav a:hover {
+            color: #007bff; /* Hover color matches the primary color */
+        }
+        .buy-now-btn {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.3s ease-in-out;
+        }
+    
+        .buy-now-btn:hover {
+            background-color: #0056b3;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 15px;
+        }
+
+        .quantity-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .quantity-input {
+            width: 50px;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-top: 10px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        .quantity-btn {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+            margin-top: 10px;
+        }
+
+        .quantity-btn:hover {
+            background-color: #0056b3;
+        }
+        
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="http://127.0.0.1:8000/services.html">Home</a>
+        <a href="http://127.0.0.1:8000/products_users.html">Products</a>
+        <a href="about.html">About Us</a>
+        
+         Add more links as needed 
+    </nav><br><br>
+   
+    <ul>
+        {% for cart_entry in cart_entries %}
+            <li>
+                <strong>{{ cart_entry.product.name }}</strong>
+                <img src="{{ cart_entry.product.image.url }}" alt="{{ cart_entry.product.name }} Image">
+                <span>Price: Rs.{{ cart_entry.product.offer }}</span>
+                <span>Quantity: {{ cart_entry.quantity }}</span>
+                <form method="post" action="{% url 'update_cart_entry' cart_entry.id %}">
+                    {% csrf_token %}
+                    <div class="quantity-container">
+                        <button type="button" class="quantity-btn" onclick="decreaseQuantity('{{ cart_entry.id }}')">-</button>
+                        <input class="quantity-input" id="quantityInput{{ cart_entry.id }}" type="number" name="quantity" value="{{ cart_entry.quantity }}" min="1" required>
+                        <button type="button" class="quantity-btn" onclick="increaseQuantity('{{ cart_entry.id }}')">+</button>
+                    </div>
+                    <button class="update-btn" type="submit">Update Quantity</button>
+                </form>
+                <form method="post" action="{% url 'remove_from_cart' cart_entry.id %}">
+                    {% csrf_token %}
+                    <button class="remove-btn" type="submit">Remove</button>
+                </form>
+                <form method="get" action="{% url 'buy_now' pk=cart_entry.product.id %}">
+                    {% csrf_token %}
+                    <button class="buy-now-btn" type="submit">Buy Now</button>
+                </form>
+                
+            </li>
+        {% endfor %}
+    </ul>
+    <script>
+        function decreaseQuantity(cartEntryId) {
+            const quantityInput = document.querySelector(`#quantityInput${cartEntryId}`);
+            if (quantityInput.value > 1) {
+                quantityInput.value = parseInt(quantityInput.value) - 1;
+            }
+        }
+
+        function increaseQuantity(cartEntryId) {
+            const quantityInput = document.querySelector(`#quantityInput${cartEntryId}`);
+            quantityInput.value = parseInt(quantityInput.value) + 1;
+        }
+    </script> 
+</body>
+</html>-->
+
+
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/cart.css' %}">
+<div class="container">
+    <div class="cart-header">
+        <h1>Your Cart</h1>
+    </div>
+    <ul>
+        {% for item in cart_items %}
+        <li class="cart-item">
+            <div class="cart-item-details">
+                <img src="{{ item.product.image.url }}" alt="{{ item.product.name }} Image" class="cart-item-image"> <!-- Add this line to display the image --><br>
+                <div class="cart-item-name">{{ item.product.name }}</div>
+                <form action="{% url 'remove-from-cart' item.product.id %}" method="post">
+                    {% csrf_token %}
+                   <div> <button class="remove-from-cart-btn" type="submit">Remove</button></div>
+                </form>
+            </div>
+            <div class="cart-item-quantity">
+                <form action="{% url 'increase-cart-item' item.product.id %}" method="post">
+                    {% csrf_token %}
+                    <button class="quantity-btn increase-quantity" type="submit">+</button>
+                </form>
+                <span class="item-quantity">{{ item.quantity }}</span>
+                <form action="{% url 'decrease-cart-item' item.product.id %}" method="post">
+                    {% csrf_token %}
+                    <button class="quantity-btn decrease-quantity" type="submit">-</button>
+                </form>
+            </div>
+            <div class="cart-item-price" data-price="{{ item.product.offer }}">
+                Rs.{{ item.product.offer }}
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+    <p class="total-price-data">Total amount: Rs. <span id="total-price">{{ total_amount }}</span></p>
+    <a class="continue-shopping-link" href="{% url 'products_users' %}">Continue Shopping</a>
+
+    <a class="checkout-button" href="http://127.0.0.1:8000/cart/checkout/">Checkout</a>
+</div>
+<script src="{% static 'js/cart.js' %}"></script>
+{% endblock %}
+

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Details</title>
+    <style>
+        /* CSS styles for the table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        ul {
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
+        }
+        form {
+            margin: 0;
+        }
+        button[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>Order Details</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>User</th>
+                <th>Total Amount</th>
+                <th>Status</th>
+                <th>Order Date</th>
+                <th>Items</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in orders %}
+            <tr>
+                <td>{{ order.id }}</td>
+                <td>{{ order.user.username }}</td>
+                <td>{{ order.total_amount }}</td>
+                <td>{{ order.get_payment_status_display }}</td>
+                <td>{{ order.created_at|date:"Y-m-d" }}</td>
+                <td>
+                    <ul>
+                        {% for item in order.orderitem_set.all %}
+                        <li>{{ item.product.name }} - Quantity: {{ item.quantity }}</li>
+                        {% endfor %}
+                    </ul>
+                </td>
+                <td>
+                    <form method="POST" action="{% url 'process_assignment' %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="order_id" value="{{ order.id }}">
+                        <button type="submit">Assign work</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

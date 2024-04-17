@@ -1,0 +1,330 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <title>View Products</title>
+
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            background-color: #ffffff; /* White background */
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+            align-items: flex-start;
+            color: #000000; /* Black text color */
+        }
+        
+        h2 {
+            text-align: center;
+            color: #333;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #e0e0e0; /* Slightly darker shade of white */
+            padding: 30px 10px;
+            width: 100%;
+            text-align: center;
+            text-decoration: none; /* Remove underlines from all links in the nav */
+        }
+        
+        nav a {
+            color: #000000; /* Black text color */
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+            font-size: 16px;
+            transition: color 0.3s ease-in-out;
+        }
+        
+        nav a:hover {
+            color: #007bff; /* Hover color matches the primary color */
+        }
+        
+        .search-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        
+        input[type="text"] {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-right: 10px;
+            width: 300px; /* Adjust the width as needed */
+        }
+        
+        button {
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+        }
+        
+        button:hover {
+            background-color: #0056b3;
+        }
+        
+        ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            overflow-y: auto; /* Enable vertical scrolling */
+            max-height: calc(100vh - 120px); /* Calculate max height for scroll */
+        }
+        
+        li {
+            background-color: #ffffff; /* White background */
+            border: 1px solid #ddd;
+            border-radius: 15px;
+            margin: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px; /* Adjusted width */
+            box-sizing: border-box;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        li:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+        
+        strong {
+            color: #333;
+            font-size: 20px;
+            display: block;
+            margin-bottom: 10px;
+        }
+        
+        img {
+            max-width: 100%;
+            height: 200px; /* Set the desired height for all images */
+            object-fit: cover; /* Ensures the image covers the specified height without distortion */
+            margin-top: 10px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        span {
+            display: block;
+            margin-top: 10px;
+            color: #555;
+            font-size: 16px;
+        }
+        
+        .original-price {
+            text-decoration: line-through;
+            color: #777;
+            font-size: 14px;
+        }
+        
+        /* Styled "View Details" button */
+        .view-details-btn,
+        .cart-btn,
+        .buy-now-btn {
+            text-decoration: none;
+        }
+        
+        .view-details-btn {
+            display: block;
+            text-align: center;
+            padding: 12px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 8px;
+            margin-top: 15px;
+            transition: background-color 0.3s ease-in-out;
+            cursor: pointer;
+            border: none;
+        }
+        
+        .view-details-btn:hover {
+            background-color: #0056b3;
+        }
+        
+        /* Add to Cart and Buy Now buttons */
+        .cart-btn,
+        .buy-now-btn {
+            display: block;
+            text-align: center;
+            padding: 10px;
+            cursor: pointer;
+            border: none;
+            border-radius: 8px;
+            margin-top: 10px;
+            transition: background-color 0.3s ease-in-out;
+        }
+        
+        .cart-btn {
+            background-color: #28a745; /* Green color for "Add to Cart" */
+            color: #fff;
+            text-decoration: none;
+        }
+        
+        .buy-now-btn {
+            background-color: #007bff; /* Blue color for "Buy Now" */
+            margin-top: 5px;
+            color: #fff;
+            text-decoration: none;
+        }
+        
+        .cart-btn:hover,
+        .buy-now-btn:hover {
+            background-color: #218838; /* Darker green on hover */
+        }
+        
+        hr {
+            border: none;
+            height: 1px;
+            background-color: #ddd;
+            margin: 20px 0;
+        }
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 79px;
+            bottom: 0;
+            width: 15%;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+
+        .sidebar h3 {
+            color: #333;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar li {
+            margin-bottom: 3px;
+        }
+
+        .sidebar a {
+            text-decoration: none;
+            color: #000;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .sidebar a:hover {
+            color: #007bff;
+        }
+
+        .content {
+            margin-left: 15%; /* Adjust to match sidebar width */
+            width: 85%; /* Take remaining width */
+            padding: 20px;
+            overflow-y: auto; /* Enable content scrolling */
+            max-height: calc(100vh - 120px); /* Calculate max height for content scroll */
+        }
+        .cart-icon {
+            display: inline-block;
+            position: relative;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 50%;
+            padding: 4px 8px;
+            font-size: 12px;
+        }
+
+        
+        
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="http://127.0.0.1:8000/services.html">Home</a>
+        <a href="http://127.0.0.1:8000/products_users.html">Products</a>
+        <a href="about.html">About Us</a>
+        <a href="{% url 'cart' %}">
+            <i class="fa fa-shopping-cart"></i> Cart
+            {% if cart_count > 0 %}
+                <span class="cart-count">{{ cart_count }}</span>
+            {% endif %}
+        </a>
+       
+        {% if user.is_authenticated %}
+            <div class="cart-icon">
+               
+                {% if cart_count == 0 %}
+                    <span></span>
+                {% else %}
+                    <span class="cart-count">{{ cart_count }}</span>
+                {% endif %}
+            </div>
+        {% endif %}
+    </nav>
+    <div class="sidebar">
+        
+        <ul>
+            <li><a href="{% url 'products_users' %}">All Categories</a></li>
+            {% for category in categories %}
+                <li><a href="?category={{ category.name }}&search={{ search_query }}">{{ category.name }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="content">
+        <h2>Product List</h2>
+
+        <!-- Search form at the top -->
+        <div class="search-container">
+            <form method="GET" action="{% url 'products_users' %}">
+                
+                <input type="text" name="search" placeholder="Search products" value="{{ search_query }}">
+                <button type="submit">Search</button><br>
+            </form>
+        </div>
+
+        <ul>
+            {% for product in products %}
+                <br>
+                <li>
+                    <a href="{% url 'user_productdetails' pk=product.pk %}" style="text-decoration: none;">
+                        <strong>{{ product.name }}</strong>
+                        {% if product.image %}
+                            <img src="{{ product.image.url }}" alt="{{ product.name }} Image">
+                        {% else %}
+                            No image available
+                        {% endif %}
+                        <span class="original-price"> Rs.{{ product.price }}</span>
+                        <span> Rs.{{ product.offer }}</span>
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
